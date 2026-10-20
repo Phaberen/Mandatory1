@@ -3,14 +3,14 @@ import {readPage, constructPage } from './util/templatingEngine.js'
 
 const app = express();
 
-const frontpage = constructPage(readPage('public/pages/frontpage/frontpage.html'), {
+const frontpage = constructPage(readPage('./public/pages/frontpage/frontpage.html'), {
     tabTitle: "Home" });
 
 //expose only what is inside 'public'
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    console.log("endpoint was accessed by a user")
+console.log("endpoint was accessed by a user")
     res.send(frontpage);
 })
 
