@@ -3,15 +3,13 @@
 <article>
   <h2>A basic server</h2>
   <p>
-    Express is a web framework in Node. we use it by importing express from the express library.
-    It provides us with a basic server
+    Express is a web framework in Node. we use it by importing express from the
+    express library. It provides us with a basic server
   </p>
   <p>
-    We can then use it as a router for our web requests. <br>
-    With <code>app.get</code> we make a route, so when someone goes to "/" <br>
+    We can then use it as a router for our web requests. <br />
+    With <code>app.get</code> we make a route, so when someone goes to "/" <br />
     the server sends something back with <code>res.send</code>
-    
-
   </p>
   <pre><code>npm i express</code></pre>
   <pre><code>import express from "express";
@@ -27,19 +25,25 @@ const PORT = process.env.PORT ?? 8080;
 app.listen(PORT, () => {
   console.log("Server is running on port", PORT);
 });</code></pre>
-<p>at the bottom of the file we declare <code>app.listen</code> to a port we choose. <br>
-  this sets the port for where the server is listening. 
-  The<code>PORT</code>variable defaults to 8080 if nothing else is set.
-</p>
+  <p>
+    at the bottom of the file we declare <code>app.listen</code> to a port we choose.
+    <br />
+    this sets the port for where the server is listening.
+    The<code>PORT</code>variable defaults to 8080 if nothing else is set.
+  </p>
 </article>
 
 <article>
   <h2>Sending data in a GET request</h2>
-  <p>We can send small bits of data in the url. With /animals/:id the :id is a placeholder, so /animals/2 gives
-  req.params.id = "2". <br>
-   <p>A path variable points to one specific thing, like /animals/2. <br>
-     A query string filters a list, like
-  /animals?type=dog.</p>
+  <p>
+    We can send small bits of data in the url. With /animals/:id the :id is a
+    placeholder, so /animals/2 gives req.params.id = "2". <br />
+  </p>
+
+  <p>
+    A path variable points to one specific thing, like /animals/2. <br />
+    A query string filters a list, like /animals?type=dog.
+  </p>
   <pre><code>// path variable: /animals/1
 app.get("/animals/:id", (req, res) => {
   res.send({ data: req.params.id });
@@ -53,8 +57,11 @@ app.get("/animals", (req, res) => {
 
 <article>
   <h2>Receiving a body</h2>
-  <p>A POST request sends its data in the body as JSON text. <br> app.use(express.json()) parses it into a
-  JavaScript object before it reaches our routes, so we can read it with req.body.</p>
+  <p>
+    A POST request sends its data in the body as JSON text. <br />
+    app.use(express.json()) parses it into a JavaScript object before it reaches our
+    routes, so we can read it with req.body.
+  </p>
   <pre><code>app.use(express.json());
 
 app.post("/animals", (req, res) => {
@@ -64,10 +71,15 @@ app.post("/animals", (req, res) => {
 
 <article>
   <h2>REST and CRUD</h2>
-  <p>CRUD means<code>create, read, update, delete</code> <br> In REST the url names the thing, like /animals, and the method
-  (GET, POST, PUT, PATCH, DELETE) says what we want to do with it </p>
-  <p>The server answers with a status code to say how it went, like 404 when nothing was found or 204 when it
-  worked but there is nothing to send back.</p>
+  <p>
+    CRUD means<code>create, read, update, delete</code> <br />
+    In REST the url names the thing, like /animals, and the method (GET, POST, PUT,
+    PATCH, DELETE) says what we want to do with it
+  </p>
+  <p>
+    The server answers with a status code to say how it went, like 404 when nothing
+    was found or 204 when it worked but there is nothing to send back.
+  </p>
   <pre><code>GET    /animals       read all
 GET    /animals/:id   read one
 POST   /animals       create
@@ -81,13 +93,19 @@ res.status(204).send();</code></pre>
 
 <article>
   <h2>Redirection</h2>
-  <p>A redirect sends the user to another page. The server can do it with res.redirect, or the browser can do it
-  itself with JavaScript, like window.location.href = "/".</p>
   <p>
-    <code>href</code> adds thge new page to the end of the list of pages visited <br>
-    <code>replace</code> swaps the current page in the list for the new one. <br>
-    in other words, using replace stores the previous page/endpoint so you can tab back to it <br>
-    using redirect never actually serves you the page, so you get sent straight to the "/" endpoint, with no option of going "back"
+    A redirect sends the user to another page. The server can do it with
+    res.redirect, or the browser can do it itself with JavaScript, like
+    window.location.href = "/".
+  </p>
+  <p>
+    <code>href</code> adds thge new page to the end of the list of pages visited
+    <br />
+    <code>replace</code> swaps the current page in the list for the new one. <br />
+    in other words, using replace stores the previous page/endpoint so you can tab
+    back to it <br />
+    using redirect never actually serves you the page, so you get sent straight to
+    the "/" endpoint, with no option of going "back"
   </p>
   <pre><code>// server-side
 app.get("/outdated-page", (req, res)   => {

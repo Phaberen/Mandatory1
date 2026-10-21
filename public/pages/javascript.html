@@ -2,14 +2,19 @@
 
 <article>
   <h2>Loop methods</h2>
-  <p>Loop methods go through every element in an array. <br>
-     <code>map</code> changes every item and returns a new array of same size with those changed elements. <br>
-     <code>filter</code> returns new array with elements that match the conditions. <br>
-  <code>find</code> gives the first match. <br>
-  <code>reduce</code> takes a start value, here 0, and adds the value of every element <code>number</code> to
-  it, resulting in one number from all the numbers combined. <br>
-  <code>forEach</code> only does something with
-  each item and returns nothing, so we rarely use it, since map or the others do the job better.</p>
+  <p>
+    Loop methods go through every element in an array. <br />
+    <code>map</code> changes every item and returns a new array of same size with
+    those changed elements. <br />
+    <code>filter</code> returns new array with elements that match the conditions.
+    <br />
+    <code>find</code> gives the first match. <br />
+    <code>reduce</code> takes a start value, here 0, and adds the value of every
+    element <code>number</code> to it, resulting in one number from all the numbers
+    combined. <br />
+    <code>forEach</code> only does something with each item and returns nothing, so
+    we rarely use it, since map or the others do the job better.
+  </p>
   <pre><code>const numbers = [1, 2, 3, 4];
 
 numbers.map((number) => number * 2);              // [2, 4, 6, 8]
@@ -18,9 +23,12 @@ numbers.find((number) => number > 2);             // 3
 numbers.reduce((sum, number) => sum + number, 0); // 10
 numbers.forEach((number) => console.log(number)); // returns nothing</code></pre>
   <p>
-    below is an example of an explicit return body with curly bracers {} which would need a return statement <br>
-    for implicit return arrow function syntax we would need <code> => number * 2</code> <br>
-    and for explicit return we would need to remember the return in the beloe snippet, so: <br>
+    below is an example of an explicit return body with curly bracers {} which would
+    need a return statement <br />
+    for implicit return arrow function syntax we would need
+    <code> => number * 2</code> <br />
+    and for explicit return we would need to remember the return in the beloe
+    snippet, so: <br />
     <code>numbers.map((number) => { return number * 2 });</code>
   </p>
   <pre><code>numbers.map((number) => { number * 2 });  // [undefined, undefined, undefined, undefined]</code></pre>
@@ -28,9 +36,13 @@ numbers.forEach((number) => console.log(number)); // returns nothing</code></pre
 
 <article>
   <h2>Server-side rendering</h2>
-  <p>Server-side rendering means the server builds the whole page before sending it. readPage reads an HTML
-  file as text, and constructPage puts header, page and footer together and puts the tab title into the
-  header. Below is an example of the <code>readPage, constructPage</code> methods this very docs site uses to display pages.</p>
+  <p>
+    Server-side rendering means the server builds the whole page before sending it.
+    readPage reads an HTML file as text, and constructPage puts header, page and
+    footer together and puts the tab title into the header. Below is an example of
+    the <code>readPage, constructPage</code> methods this very docs site uses to
+    display pages.
+  </p>
   <pre><code>export function readPage(path) {
   return fs.readFileSync(path, "utf-8");
 }
@@ -45,7 +57,10 @@ export function constructPage(page, options = {}) {
     footer
   );
 }</code></pre>
-  <p> Each page is built once when the server starts and saved as a const to be sent the moment a user visits page</p>
+  <p>
+    Each page is built once when the server starts and saved as a const to be sent
+    the moment a user visits page
+  </p>
   <pre><code>const toolsPage = constructPage(readPage("./public/pages/tools.html"), {
   tabTitle: "Tools",
 });
@@ -53,7 +68,10 @@ export function constructPage(page, options = {}) {
 app.get("/tools", (req, res) => {
   res.send(toolsPage);
 });</code></pre>
-  <p>Server-side rendering is good when the user should get full pages, like on this docs site. Client-side
-  rendering seems smarter when a page has many interactive elements that need to load independently , without
-  reloading the entire page every time.</p>
+  <p>
+    Server-side rendering is good when the user should get full pages, like on this
+    docs site. Client-side rendering seems smarter when a page has many interactive
+    elements that need to load independently , without reloading the entire page
+    every time.
+  </p>
 </article>
