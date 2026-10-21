@@ -1,17 +1,13 @@
-# Node.js Docs
+ # Mandatory 1 - Node.js docs
 
-  A documentation site for the Node.js course, served with Express and server-side rendering.
+  My documentation site for the Node.js course. It covers what we've been through so far: tools, Express,
+  modules, fetch and some JavaScript basics.
 
-  ## How to run
+  The server is Express and the pages are server-side rendered with a small templating function I made (header
+  + page + footer). Styling is Pico CSS from CDN.
+
+  ## Run it
   npm i
   npm run dev
 
-  Open http://localhost:8080
-
-  ## Pages
-  - / : front page
-  - /tools : npm, scripts, nodemon, ESLint, Prettier, git
-  - /express : server, routes, REST, redirection
-  - /modules : CommonJS vs ES Modules, static files, environment variables
-  - /fetch : fetch, promises, dates
-  - /javascript : loop methods, server-side rendering
+  Then go to http://localhost:8080
