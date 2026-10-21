@@ -1,9 +1,14 @@
 <h1>Modules</h1>
 
 <article>
-  <h2>CommonJS vs ES Modules</h2>
-  <p></p>
-  <pre><code>// CommonJS
+<h2>CommonJS vs ES Modules</h2>
+<p>Modules let files share code. CommonJS is the old way with require and module.exports. <br>
+ES Modules is the new
+way with import and export, and needs "type": "module" in package.json.</p>
+<p>For example, the bottom snippet is an import example from the code used to make this node.js Docs.
+<code>./util/templatingEngine.js</code>. <br>
+</p>
+<pre><code>// CommonJS
 const express = require("express");
 module.exports = { readPage };</code></pre>
   <pre><code>// ES Modules ("type": "module" in package.json)
@@ -15,14 +20,24 @@ export function readPage(path) { ... }</code></pre>
 
 <article>
   <h2>Serving static files</h2>
-  <p></p>
+  <p><code>express.static("public")</code> makes every file in the public folder reachable from the browser. <br>
+  Important to note that the path is now based on /public, so it has to be omitted as shown in 2nd snippet
+  </p>
   <pre><code>app.use(express.static("public"));</code></pre>
   <pre><code>public/assets/css/main.css   →   /assets/css/main.css</code></pre>
 </article>
 
 <article>
   <h2>Environment variables</h2>
-  <p></p>
+  <p>Environment variables are settings we give the app when we start it, and we read them with process.env. If
+  PORT is not set, we use 8080.</p>
+  <p>
+    <p>?? only uses 8080 if the value is null or undefined. || also uses it if the value is 0 or empty, which can
+  give the wrong result.
+  </p>
+  <p>
+  in other words, using <code>||</code> will deem the statement false(falsey) with values like 0 or "" (empty string) 
+  </p>
   <pre><code>const PORT = process.env.PORT ?? 8080;</code></pre>
   <pre><code>$env:PORT=3000; npm start</code></pre>
   <p></p>
