@@ -1,0 +1,7 @@
+# header and footer are partial components which leads prettier 
+# to break those components, rather than making them prettier. 
+
+# would still like indentation and other formatting for exisiting html files
+# works as long as the HTML is a non-divided component
+
+public/components/
