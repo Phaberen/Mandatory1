@@ -3,39 +3,120 @@
 <article>
   <h2>Node Package Manager (npm)</h2>
   <p>
-    npm is a Command Line Interface tool(CLI) installed alongside Node.<br />
-    It installs, updates and removes package s and runs scripts
+    npm is a Command Line Interface tool (CLI) installed alongside Node.
+    <br />
+    It installs, updates and removes packages and runs scripts
   </p>
-  <pre><code>npm init -y</code></pre>
+  <p>
+    <code>npm init</code> creates package.json in the selected folder.<br>
+    the -y flag accepts all default answers during init so you dont have to
+  </p>
+  <p>
+    <code> npm i</code> installs everything listed in package.json <br>
+    if followed by a name, for example <code>express</code>, npm downloads express into <code>node_modules</code> and writes it¨ into <code>package.json</code> 
+  </p>
+  <pre><code>npm init -y
+npm i
+npm i express</code></pre>
 </article>
 
 <article>
   <h2>package.json</h2>
   <p>
-    
+    A similar to above except this installs and writes the nodemon dependency with a -D flag <br>
+    this installs nodemon in <code>node_modules</code>, writes it in <code>package.json</code> under <code>devDependencies</code>. <br>
   </p>
-  <pre><code>npm i express
-npm i -D nodemon</code></pre>
-</article>
-
-<article>
-  <h2>Scripts</h2>
-  <p></p>
-  <pre><code>"scripts": {
-  "start": "node app.js",
-  "dev": "nodemon -e js,json,html app.js"
+  <p>
+  <code>"type": "module"</code> lets node handle the .js files as ES Modules, which lets us <code>import/export</code>
+  rather than <code>require</code> with CommonJS
+  </p>
+  <p>
+    the dependencies each have a version range. <br>
+    this means they are compatible with version from current and up, until the next major version change. 
+  </p>
+  <pre><code>npm i -D nodemon</code></pre>
+  <pre><code>{
+  "type": "module",
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
 }</code></pre>
 </article>
 
 <article>
+  <h2>Scripts</h2>
+  <p>
+    scripts are also placed in package.json. <br>
+    aside from <code>start, test</code> which are built-in shorthand commands that npm already knows, <br>
+    scripts are shortcuts for commands. instead of <code>nodemon -e js,json,html app.js</code> we can have a script "dev" that runs by typing <code>npm run dev</code>
+  </p>
+  <p>
+    it is important to have standards for dev and prod environments. scripts can help with this.
+  </p>
+  <pre><code>"scripts": {
+  "start": "node app.js",
+  "dev": "nodemon -e js,json,html app.js",
+  "lint": "eslint .",
+  "format": "prettier --write ."
+}</code></pre>
+  <pre><code>npm start
+npm run dev</code></pre>
+</article>
+
+<article>
   <h2>nodemon</h2>
-  <p></p>
-  <pre><code>npm run dev</code></pre>
+  <p>
+    Nodemon is a program that watches for file changes, and it exits + restarts the app when they occur. <br>
+    great for development as you almost instantly view changes to the running app.
+  </p>
+  <p>
+    <code>"dev": "nodemon -e js,json,html app.js"</code> replaces the list of files <code>nodemon</code> watches, with the one provided. <br>
+    this was done to have nodemon restart app upon html changes as well as .js file changes.
+  </p>
+  <pre><code>npm run dev
+[nodemon] watching extensions: js,json,html
+[nodemon] starting `node app.js`
+[nodemon] restarting due to changes...</code></pre>
+</article>
+
+<article>
+  <h2>ESLint and Prettier</h2>
+  <p>
+    Eslint is considerd the "de facto standard" linter for js. <br>
+    Linters read code without running it. they finds bugs, errors, unused variables etc. in your code. <br>
+    they enforce  good code conventions by setting standards everyone follows.
+  </p>
+  <p>prettier is used for formatting, for example: trailing spaces, unconventional/wrong indentations. it generally provides format symmetry everywhere in your code </p>
+  <p>
+    here we again download to <code>node_modules</code>, write it in <code>package.json</code> under <code>devDependencies</code><br>
+    <code>lint, format</code> are scripts defined in package.json
+  </p>
+  <pre><code>npm init @eslint/config@latest
+npm i -D prettier
+npm run lint
+npm run format</code></pre>
+  <pre><code>public/components/</code></pre>
 </article>
 
 <article>
   <h2>git</h2>
-  <p></p>
+  <p>
+    in<code>.gitignore</code> <code>node_modules</code> because we don't want it pushed to github repository. <br>
+    is is quite large and clutters the remote repository with sizey files <br>
+    most importantly, it is reproducible from our <code>package-lock.json</code> that holds our exact dependencies and their versions. <br>
+    therefore anyone pulling the repository can recreate the exact <code>node_modules</code>directory.
+  </p>
+  <p>
+    simple git: <br>
+    1. initializes git in directory <br>
+    2. <code>add "."</code> means add all file changes in current working directory and all of subdirectories. <br>
+    3. commits the added changes to git, with a message. <br>
+    4. pushes the unpushed commits to the remote repository on github. 
+    <p>
+  <pre><code>node_modules</code></pre>
   <pre><code>git init
 git add .
 git commit -m "message"

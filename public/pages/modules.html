@@ -1,0 +1,31 @@
+<h1>Modules</h1>
+
+<article>
+  <h2>CommonJS vs ES Modules</h2>
+  <p></p>
+  <pre><code>// CommonJS
+const express = require("express");
+module.exports = { readPage };</code></pre>
+  <pre><code>// ES Modules ("type": "module" in package.json)
+import express from "express";
+export function readPage(path) { ... }</code></pre>
+  <p></p>
+  <pre><code>import { readPage, constructPage } from "./util/templatingEngine.js";</code></pre>
+</article>
+
+<article>
+  <h2>Serving static files</h2>
+  <p></p>
+  <pre><code>app.use(express.static("public"));</code></pre>
+  <pre><code>public/assets/css/main.css   →   /assets/css/main.css</code></pre>
+</article>
+
+<article>
+  <h2>Environment variables</h2>
+  <p></p>
+  <pre><code>const PORT = process.env.PORT ?? 8080;</code></pre>
+  <pre><code>$env:PORT=3000; npm start</code></pre>
+  <p></p>
+  <pre><code>0 ?? 8080   // 0
+0 || 8080   // 8080</code></pre>
+</article>

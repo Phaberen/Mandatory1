@@ -1,0 +1,70 @@
+<h1>Express</h1>
+
+<article>
+  <h2>A basic server</h2>
+  <p></p>
+  <pre><code>npm i express</code></pre>
+  <pre><code>import express from "express";
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send({ data: "Hello from the server" });
+});
+
+const PORT = process.env.PORT ?? 8080;
+
+app.listen(PORT, () => {
+  console.log("Server is running on port", PORT);
+});</code></pre>
+</article>
+
+<article>
+  <h2>Sending data in a GET request</h2>
+  <p></p>
+  <pre><code>// path variable: /animals/1
+app.get("/animals/:id", (req, res) => {
+  res.send({ data: req.params.id });
+});
+
+// query string: /animals?type=dog
+app.get("/animals", (req, res) => {
+  res.send({ data: req.query.type });
+});</code></pre>
+</article>
+
+<article>
+  <h2>Receiving a body</h2>
+  <p></p>
+  <pre><code>app.use(express.json());
+
+app.post("/animals", (req, res) => {
+  res.send({ data: req.body });
+});</code></pre>
+</article>
+
+<article>
+  <h2>REST and CRUD</h2>
+  <p></p>
+  <pre><code>GET    /animals       read all
+GET    /animals/:id   read one
+POST   /animals       create
+PUT    /animals/:id   replace
+PATCH  /animals/:id   update
+DELETE /animals/:id   delete</code></pre>
+  <p></p>
+  <pre><code>res.status(404).send({ errorMessage: "No animal found" });
+res.status(204).send();</code></pre>
+</article>
+
+<article>
+  <h2>Redirection</h2>
+  <p></p>
+  <pre><code>// server-side
+app.get("/old-page", (req, res) => {
+  res.redirect("/");
+});</code></pre>
+  <pre><code>// client-side
+window.location.href = "/";
+location.replace("/");</code></pre>
+</article>
