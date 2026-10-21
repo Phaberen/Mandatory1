@@ -3,75 +3,55 @@ import { readPage, constructPage } from "./util/templatingEngine.js";
 
 const app = express();
 
-const frontpage = constructPage(
-  readPage("./public/pages/frontpage.html"),
-  {
-    tabTitle: "Home",
-  },
-);
+const frontpage = constructPage(readPage("./public/pages/frontpage.html"), {
+  tabTitle: "Home",
+});
 
-const toolspage = constructPage(
-  readPage("./public/pages/tools.html"),
-  {
-    tabTitle: "Tools",
-  },
-);
+const toolsPage = constructPage(readPage("./public/pages/tools.html"), {
+  tabTitle: "Tools",
+});
 
-const expresspage = constructPage(
-  readPage("./public/pages/express.html"),
-  {
-    tabTitle: "Express",
-  },
-);
+const expressPage = constructPage(readPage("./public/pages/express.html"), {
+  tabTitle: "Express",
+});
 
-const modulespage = constructPage(
-  readPage("./public/pages/modules.html"),
-  {
-    tabTitle: "Modules",
-  },
-);
+const modulesPage = constructPage(readPage("./public/pages/modules.html"), {
+  tabTitle: "Modules",
+});
 
-const fetchpage = constructPage(
-  readPage("./public/pages/fetch.html"),
-  {
-    tabTitle: "Fetch",
-  },
-);
+const fetchPage = constructPage(readPage("./public/pages/fetch.html"), {
+  tabTitle: "Fetch",
+});
 
-const javascriptpage = constructPage(
-  readPage("./public/pages/javascript.html"),
-  {
-    tabTitle: "Javascript",
-  },
-);
+const javascriptPage = constructPage(readPage("./public/pages/javascript.html"), {
+  tabTitle: "Javascript",
+});
 
 //expose only what is inside 'public'
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  console.log("fontpage was accessed by a user");
   res.send(frontpage);
 });
 
 app.get("/tools", (req, res) => {
-  console.log("toolspage was accessed by a user");
-  res.send(toolspage);
+  res.send(toolsPage);
 });
 
 app.get("/express", (req, res) => {
-  res.send(expresspage);
+  res.send(expressPage);
 });
 
 app.get("/modules", (req, res) => {
-  res.send(modulespage);
+  res.send(modulesPage);
 });
 
 app.get("/fetch", (req, res) => {
-  res.send(fetchpage);
+  res.send(fetchPage);
 });
 
-app.get("/Javascript", (req, res) => {
-  res.send(javascriptpage);
+app.get("/javascript", (req, res) => {
+  res.send(javascriptPage);
 });
 
 // uses environment variable PORT if set, else 8080
