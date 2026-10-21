@@ -1,0 +1,43 @@
+<h1>JavaScript</h1>
+
+<article>
+  <h2>Loop methods</h2>
+  <p></p>
+  <pre><code>const numbers = [1, 2, 3, 4];
+
+numbers.map((number) => number * 2);              // [2, 4, 6, 8]
+numbers.filter((number) => number > 2);           // [3, 4]
+numbers.find((number) => number > 2);             // 3
+numbers.reduce((sum, number) => sum + number, 0); // 10
+numbers.forEach((number) => console.log(number)); // returns nothing</code></pre>
+  <p></p>
+  <pre><code>numbers.map((number) => { number * 2 });  // [undefined, undefined, undefined, undefined]</code></pre>
+</article>
+
+<article>
+  <h2>Server-side rendering</h2>
+  <p></p>
+  <pre><code>export function readPage(path) {
+  return fs.readFileSync(path, "utf-8");
+}
+
+export function constructPage(page, options = {}) {
+  const header = readPage("public/components/header.html");
+  const footer = readPage("public/components/footer.html");
+
+  return (
+    header.replace("{{TAB_TITLE}}", options.tabTitle ?? "Node.js Docs") +
+    page +
+    footer
+  );
+}</code></pre>
+  <p></p>
+  <pre><code>const toolsPage = constructPage(readPage("./public/pages/tools.html"), {
+  tabTitle: "Tools",
+});
+
+app.get("/tools", (req, res) => {
+  res.send(toolsPage);
+});</code></pre>
+  <p></p>
+</article>
